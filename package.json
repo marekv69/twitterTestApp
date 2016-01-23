@@ -1,9 +1,9 @@
 {
-  "name": "Este",
+  "name": "twitterTestApp",
   "authors": [
-    "Daniel Steigerwald"
+    "Marek Vasik"
   ],
-  "description": "Dev stack and starter kit for React universal web apps",
+  "description": "test react application based on este Dev stack and starter kit for React universal web apps",
   "private": true,
   "//": "Use gulp for dev etc. Note postinstall, it's for Heroku",
   "scripts": {
