@@ -57,7 +57,7 @@ export default class Page extends Component {
     return (
       <div className="twitter-app-page">
         <Helmet title="Twitter app" />
-        <h1>Twitter app</h1>
+        <h2>Show 50 latest tweets by user name</h2>
         <SearchBar onSearchBarButtonClick={this.getTweets} isGUIDisabledDueToLoading={this.state.areTweetsLoading}/>
         {tweetsSearchOutput}
       </div>
