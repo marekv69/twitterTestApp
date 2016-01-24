@@ -10,7 +10,7 @@ this app is used for showing 50 latest tweets of a twitter user. It's implemente
 
 ## Installation
  1. clone repository
- 2. open folder with clone project in console and 
+ 2. open folder with clone project in console
  3. type npm install to download dependencies
  4. type gulp to run project
  5. open a web browser and open the application on http://localhost:8000 URL
