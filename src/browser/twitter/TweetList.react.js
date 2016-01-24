@@ -82,6 +82,8 @@ export default class TweetList extends Component {
       <Tweet data={currentTweet} key={currentTweet.id}/>
     );
 
+
+    //TODO: search in tweets and show modal window
     return (
       <div className="tweet-list">
         <ButtonGroup>
@@ -105,9 +107,6 @@ export default class TweetList extends Component {
           disabled
           placeholder="Search in tweets"
           type="text"
-
-          //TODO: search in tweets
-          //onChange={this.handleChange}
         />
         {tweets}
       </div>
