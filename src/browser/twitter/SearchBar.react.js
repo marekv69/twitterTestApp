@@ -17,10 +17,18 @@ export default class SearchBar extends Component {
     }
     this._handleInputValueChange = this._handleInputValueChange.bind(this);
     this._onButtonClick = this._onButtonClick.bind(this);
+    this._handleKeyPress = this._handleKeyPress.bind(this);
   }
 
   _handleInputValueChange(event) {
     this.setState({currentInputValue : event.target.value})
+  }
+
+  _handleKeyPress(event) {
+    if(event.charCode==13){
+      event.preventDefault();
+      this._onButtonClick();
+    }
   }
 
   _onButtonClick()
@@ -37,6 +45,7 @@ export default class SearchBar extends Component {
             className="input"
             disabled= {this.props.isGUIDisabledDueToLoading}
             onChange={this._handleInputValueChange}
+            onKeyPress={this._handleKeyPress}
             placeholder="Type twitter username"
             standalone
             type="text"
