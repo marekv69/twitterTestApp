@@ -12,7 +12,7 @@ export default function ajaxGet(url) {
       }
     };
     req.onerror = () => {
-      reject(new Error("Network error"));
+      reject(new Error("Network error when communicating with the backend"));
     };
     req.send();
   });
