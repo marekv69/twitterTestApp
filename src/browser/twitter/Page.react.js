@@ -20,7 +20,10 @@ export default class Page extends Component {
   }
 
   getTweets(text) {
-    this.setState({areTweetsLoading : true});
+    this.setState({
+      tweetsResponse: null,
+      areTweetsLoading : true
+    });
     ajaxGet("/user_timeline?screen_name="+text)
       .then(JSON.parse)
       .then((response) => {this.onCorrectResponse(response); })
