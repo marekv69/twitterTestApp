@@ -19,7 +19,6 @@ export default class SearchBar extends Component {
     this._onButtonClick = this._onButtonClick.bind(this);
   }
 
-
   _handleInputValueChange(event) {
     this.setState({currentInputValue : event.target.value})
   }
@@ -31,7 +30,6 @@ export default class SearchBar extends Component {
   }
 
   render() {
-    console.log(this.state.currentInputValue);
     return (
       <div className="search-bar">
         <form>

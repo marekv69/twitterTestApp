@@ -3,6 +3,7 @@ import React  from 'react';
 import Helmet from 'react-helmet';
 import TweetList from './TweetList.react';
 import SearchBar from './SearchBar.react';
+import Message from './Message.react';
 import ajaxGet from '../lib/ajaxHelper'
 
 export default class Page extends Component {
@@ -10,7 +11,7 @@ export default class Page extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tweets: [],
+      tweetsResponse: null,
       areTweetsLoading : false,
       currentUserName : ""
     };
@@ -29,36 +30,36 @@ export default class Page extends Component {
   onCorrectResponse(response)
   {
     this.setState({
-      tweets: response.tweets,
+      tweetsResponse: response,
       areTweetsLoading : false
     });
   }
 
   onErrorResponse(error)
   {
-    console.log(error);
     this.setState({
-      tweets: [],
+      tweetsResponse: {errorMessage: error.message},
       areTweetsLoading : false
     });
   }
 
   render() {
-    let tweetsOutput;
-    if(this.state.tweets.length > 0){
-      tweetsOutput = <TweetList tweets={this.state.tweets} />;
-    }
-    else {
-      tweetsOutput = <div>No data</div>;
-    }
-    console.log(typeof this.getTweets);
-    return (
+    var tweetsSearchOutput = null;
+    var tweetsResponse = this.state.tweetsResponse;
 
+    if(tweetsResponse !== null && tweetsResponse.hasOwnProperty("tweets") ){
+      tweetsSearchOutput = <TweetList tweets={tweetsResponse.tweets} />;
+    } else if (tweetsResponse !== null &&
+      (tweetsResponse.hasOwnProperty("errorMessage") || tweetsResponse.hasOwnProperty("standardMessage"))){
+      tweetsSearchOutput = <Message tweetsResponse = {tweetsResponse} />;
+    }
+
+    return (
       <div className="twitter-app-page">
         <Helmet title="Twitter app" />
         <h1>Twitter app</h1>
         <SearchBar onSearchBarButtonClick={this.getTweets} isGUIDisabledDueToLoading={this.state.areTweetsLoading}/>
-        {tweetsOutput}
+        {tweetsSearchOutput}
       </div>
     );
   }
