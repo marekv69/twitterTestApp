@@ -10,14 +10,17 @@ export default class Page extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tweets: []
+      tweets: [],
+      areTweetsLoading : false,
+      currentUserName : ""
     };
+
+    this.getTweets = this.getTweets.bind(this);
   }
 
-
-  componentDidMount() {
-
-    ajaxGet("/user_timeline?screen_name=NFL")
+  getTweets(text) {
+    this.setState({areTweetsLoading : true});
+    ajaxGet("/user_timeline?screen_name="+text)
       .then(JSON.parse)
       .then((response) => {this.onCorrectResponse(response); })
       .catch((error)=> { this.onErrorResponse(error); });
@@ -25,13 +28,19 @@ export default class Page extends Component {
 
   onCorrectResponse(response)
   {
-    this.setState({tweets: response.tweets});
+    this.setState({
+      tweets: response.tweets,
+      areTweetsLoading : false
+    });
   }
 
   onErrorResponse(error)
   {
     console.log(error);
-    this.setState({tweets: []});
+    this.setState({
+      tweets: [],
+      areTweetsLoading : false
+    });
   }
 
   render() {
@@ -42,12 +51,13 @@ export default class Page extends Component {
     else {
       tweetsOutput = <div>No data</div>;
     }
-
+    console.log(typeof this.getTweets);
     return (
+
       <div className="twitter-app-page">
         <Helmet title="Twitter app" />
         <h1>Twitter app</h1>
-        <SearchBar />
+        <SearchBar onSearchBarButtonClick={this.getTweets} isGUIDisabledDueToLoading={this.state.areTweetsLoading}/>
         {tweetsOutput}
       </div>
     );
