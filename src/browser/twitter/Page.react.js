@@ -1,14 +1,11 @@
 import Component from 'react-pure-render/component';
-import React, {PropTypes} from 'react';
+import React  from 'react';
 import Helmet from 'react-helmet';
 import TweetList from './TweetList.react';
+import SearchBar from './SearchBar.react';
 import ajaxGet from '../lib/ajaxHelper'
 
 export default class Page extends Component {
-
-  static propTypes = {
-    msg: PropTypes.object
-  };
 
   constructor(props) {
     super(props);
@@ -20,7 +17,7 @@ export default class Page extends Component {
 
   componentDidMount() {
 
-    ajaxGet("/test?screen_name=sdsadasd&count=50")
+    ajaxGet("/user_timeline?screen_name=NFL")
       .then(JSON.parse)
       .then((response) => {this.onCorrectResponse(response); })
       .catch((error)=> { this.onErrorResponse(error); });
@@ -50,6 +47,7 @@ export default class Page extends Component {
       <div className="twitter-app-page">
         <Helmet title="Twitter app" />
         <h1>Twitter app</h1>
+        <SearchBar />
         {tweetsOutput}
       </div>
     );
