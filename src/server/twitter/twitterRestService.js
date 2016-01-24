@@ -12,12 +12,27 @@ const config = {
 app.get("/user_timeline",function (req, res)  {
   var twit = new Twit(config);
   twit.get('statuses/user_timeline', { screen_name: req.query.screen_name, count: 50 }, (err, data) => {
-    if(Array.isArray(data)) {
-      res.send({ tweets: data });
+    let response;
+
+    if(typeof err !== "undefined") {
+      response = {
+          errorMessage : "There were communication error with Twitter API when trying to gather tweets for user "+
+          req.query.screen_name + ". Error message: " + err.message + " Error code: " + err.code
+        };
+    } else {
+      if(Array.isArray(data) && data.length > 0) {
+        response = {
+          tweets: data
+        };
+      }
+      else {
+        response = {
+          standardMessage : "There are no tweets for user " + req.query.screen_name + " available."
+        };
+      }
     }
-    else {
-      res.send({ tweets: [] });
-    }
+
+    res.send(response);
   });
 });
 
