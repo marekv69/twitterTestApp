@@ -9,9 +9,9 @@ const config = {
   "app_only_auth" :  true
 };
 
-app.get("/test",function (req, res)  {
+app.get("/user_timeline",function (req, res)  {
   var twit = new Twit(config);
-  twit.get('statuses/user_timeline', { screen_name: 'NFL', count: 50 }, (err, data) => {
+  twit.get('statuses/user_timeline', { screen_name: req.query.screen_name, count: 50 }, (err, data) => {
     if(Array.isArray(data)) {
       res.send({ tweets: data });
     }
