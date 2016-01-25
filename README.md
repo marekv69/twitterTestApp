@@ -10,7 +10,7 @@ this app is used for showing 50 latest tweets of a twitter user. It's implemente
 
 ## Main code of the application
 * /twitterTestApp/src/browser/twitter - react component and styles
-* /twitterTestApp/src/browser/lib/ajaxHelper.js - ajaxmethod impl
+* /twitterTestApp/src/browser/lib/ajaxHelper.js - ajax get method impl
 * /twitterTestApp/src/server/twitter - rest service for gathering tweets from Twitter API
 
 ## Installation
