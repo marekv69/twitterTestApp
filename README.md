@@ -20,6 +20,9 @@ this app is used for showing 50 latest tweets of a twitter user. It's implemente
  4. type gulp to run project
  5. open a web browser and open the application on http://localhost:8000 URL
 
+## Live example of APP on heroku web server
+ (https://marekvtwittertestapp.herokuapp.com/)
+
 ## TODO
 * implement fulltext searching in downloaded tweets
 * implement modal window for showing general info about the tweets
