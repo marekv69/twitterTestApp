@@ -25,6 +25,5 @@ this app is used for showing 50 latest tweets of a twitter user. It's implemente
 
 ## TODO
 * implement fulltext searching in downloaded tweets
-* implement modal window for showing general info about the tweets
 * Try using redux and Immutablejs libraries to implement data layer
 * use more functionality from este framework
