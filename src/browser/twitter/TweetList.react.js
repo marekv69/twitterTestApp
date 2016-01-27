@@ -2,6 +2,7 @@ import './TweetList.styl';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 import Tweet from 'react-tweet'
+import ModalInfo from './ModalInfo.react'
 import {Input,ButtonGroup, DropdownButton, Button, MenuItem} from 'react-bootstrap';
 
 export default class TweetList extends Component {
@@ -15,10 +16,13 @@ export default class TweetList extends Component {
     this.state = {
       currentSorting : "date",
       currentSortingType : "desc",
-      sortedTweets : props.tweets
+      sortedTweets : props.tweets,
+      showModalInfo : false
     };
     this._sortByDate = this._sortByDate.bind(this);
     this._sortByLikes = this._sortByLikes.bind(this);
+    this._showModalInfo = this._showModalInfo.bind(this);
+    this._hideModalInfo = this._hideModalInfo.bind(this);
   }
 
   _sortByDate(e, sortingType) {
@@ -77,6 +81,18 @@ export default class TweetList extends Component {
     }
   }
 
+  _showModalInfo() {
+    this.setState({
+      showModalInfo : true
+    });
+  }
+
+  _hideModalInfo() {
+    this.setState({
+      showModalInfo : false
+    });
+  }
+
   render() {
     let tweets = this.state.sortedTweets.map(currentTweet =>
       <Tweet data={currentTweet} key={currentTweet.id}/>
@@ -96,9 +112,10 @@ export default class TweetList extends Component {
             <MenuItem eventKey="desc">Descending</MenuItem>
           </DropdownButton>
           <Button
-            disabled
             bsStyle="success"
-            bsSize="xsmall">
+            bsSize="xsmall"
+            onClick={this._showModalInfo}
+          >
             Show modal info
           </Button>
         </ButtonGroup>
@@ -109,6 +126,7 @@ export default class TweetList extends Component {
           type="text"
         />
         {tweets}
+        <ModalInfo tweets={this.state.sortedTweets} showModalInfo={this.state.showModalInfo} closeModalInfoHandler = {this._hideModalInfo}/>
       </div>
     );
   }
