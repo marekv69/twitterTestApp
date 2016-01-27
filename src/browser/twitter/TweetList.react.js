@@ -99,7 +99,7 @@ export default class TweetList extends Component {
     );
 
 
-    //TODO: search in tweets and show modal window
+    //TODO: search in tweets
     return (
       <div className="tweet-list">
         <ButtonGroup>
