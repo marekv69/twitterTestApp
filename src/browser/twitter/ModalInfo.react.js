@@ -1,6 +1,6 @@
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
-import {Modal, Button} from 'react-bootstrap';
+import {Modal,  Button} from 'react-bootstrap';
 
 
 export default class ModalInfo extends Component {
@@ -22,6 +22,9 @@ export default class ModalInfo extends Component {
   }
 
   render() {
+    //This line is here because of bug https://phabricator.babeljs.io/T6662
+    const {Header: ModalHeader, Body: ModalBody, Footer: ModalFooter, Title : ModalTitle} = Modal;
+
     var {numberOfLikes, likesPerTweet, userNamesInTweetsMap} =  getTweetsInfo(this);
 
     var userNames = null;
@@ -36,17 +39,17 @@ export default class ModalInfo extends Component {
 
     return (
       <Modal backdrop='static' show={this.props.showModalInfo} onHide={this._closeModalInfo}>
-        <Modal.Header closeButton>
-          <Modal.Title>Statistics for shown tweets</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+        <ModalHeader closeButton>
+          <ModalTitle>Statistics for shown tweets</ModalTitle>
+        </ModalHeader>
+        <ModalBody>
           <div>Number of likes: {numberOfLikes}</div>
           <div>Likes per tweet: {likesPerTweet}</div>
           {userNames !==null ? <div>User names: {userNames}</div> : null}
-        </Modal.Body>
-        <Modal.Footer>
+        </ModalBody>
+        <ModalFooter>
           <Button onClick={this._closeModalInfo}>Close</Button>
-        </Modal.Footer>
+        </ModalFooter>
       </Modal>
     );
   }
