@@ -56,6 +56,8 @@ export default class TweetList extends Component {
   }
 
   render() {
+    console.log("render");
+
     const filterRegex = this.state.filterString !== "" ? new RegExp(this.state.filterString, "i") : null;
 
     var sortedTweets = createSortedTweets(this.props.tweets, this.state.currentSortingProperty, this.state.currentSortingType);
@@ -84,7 +86,7 @@ export default class TweetList extends Component {
           Sorted by <Label bsStyle="info">{this.state.currentSortingProperty} {this.state.currentSortingType}</Label> :
         </div>
         {filteredTweets.length > 0 ? filteredTweets :
-          <div>There are no tweets containing <Label bsStyle="warning">{this.state.currentSortingProperty}</Label>
+          <div>There are no tweets containing <Label bsStyle="warning">{this.state.filterString}</Label>
           </div>}
         <ModalInfo tweets={this.props.tweets} showModalInfo={this.state.showModalInfo}
                    closeModalInfoHandler={this._hideModalInfo}/>
