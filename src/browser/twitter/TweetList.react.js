@@ -56,8 +56,6 @@ export default class TweetList extends Component {
   }
 
   render() {
-    console.log("render");
-
     const filterRegex = this.state.filterString !== "" ? new RegExp(this.state.filterString, "i") : null;
 
     var sortedTweets = createSortedTweets(this.props.tweets, this.state.currentSortingProperty, this.state.currentSortingType);
