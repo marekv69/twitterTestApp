@@ -3,7 +3,7 @@ import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 import Tweet from 'react-tweet'
 import ModalInfo from './ModalInfo.react'
-import {Input,ButtonGroup, DropdownButton, Button, MenuItem} from 'react-bootstrap';
+import {Input,ButtonGroup, DropdownButton, Button, MenuItem, Label} from 'react-bootstrap';
 
 export default class TweetList extends Component {
 
@@ -15,21 +15,23 @@ export default class TweetList extends Component {
     super(props);
     this.state = {
       currentSorting : "date",
-      currentSortingType : "desc",
+      currentSortingType : "descending",
       sortedTweets : props.tweets,
+      filterString : "",
       showModalInfo : false
     };
     this._sortByDate = this._sortByDate.bind(this);
     this._sortByLikes = this._sortByLikes.bind(this);
     this._showModalInfo = this._showModalInfo.bind(this);
     this._hideModalInfo = this._hideModalInfo.bind(this);
+    this._handleKeyPress = this._handleKeyPress.bind(this);
   }
 
   _sortByDate(e, sortingType) {
     if(this.state.currentSorting !== "date" || this.state.currentSortingType !== sortingType) {
       let reSortedTweets;
 
-      if(sortingType == "desc") {
+      if(sortingType == "descending") {
         reSortedTweets= this.state.sortedTweets.sort((a,b)=>(
           new Date(b.created_at) - new Date(a.created_at)
         ));
@@ -52,7 +54,7 @@ export default class TweetList extends Component {
     if(this.state.currentSorting !== "likes" || this.state.currentSortingType !== sortingType) {
       let reSortedTweets;
 
-      if(sortingType == "desc") {
+      if(sortingType == "descending") {
         reSortedTweets= this.state.sortedTweets.sort((a,b)=>{
           let aFavorite_count = a.hasOwnProperty("retweeted_status") ? a.retweeted_status.favorite_count :
             a.favorite_count;
@@ -93,23 +95,38 @@ export default class TweetList extends Component {
     });
   }
 
+  _handleKeyPress(event) {
+    if(event.charCode==13){
+      event.preventDefault();
+      this.setState({
+        filterString : event.target.value
+      });
+    }
+  }
+
   render() {
-    let tweets = this.state.sortedTweets.map(currentTweet =>
-      <Tweet data={currentTweet} key={currentTweet.id}/>
-    );
+    var tweets, filterRegex;
+    var filterRegex = this.state.filterString !== "" ? new RegExp(this.state.filterString, "i") : null;
+
+    tweets = this.state.sortedTweets
+      .reduce((arrayWithTweets, currentTweet) => {
+        if (filterRegex === null || filterRegex.test(currentTweet.text)) {
+          arrayWithTweets.push(<Tweet data={currentTweet} key={currentTweet.id}/>);
+        }
+        return arrayWithTweets;
+      }, []);
 
 
-    //TODO: search in tweets
     return (
       <div className="tweet-list">
         <ButtonGroup>
           <DropdownButton title="Sort by date" bsStyle="info" bsSize="xsmall" id="dropdown1" onSelect={this._sortByDate}>
-            <MenuItem eventKey="asc">Ascending</MenuItem>
-            <MenuItem eventKey="desc">Descending</MenuItem>
+            <MenuItem eventKey="ascending">Ascending</MenuItem>
+            <MenuItem eventKey="descending">Descending</MenuItem>
           </DropdownButton>
           <DropdownButton title="Sort by likes" bsStyle="info" bsSize="xsmall" id="dropdown2" onSelect={this._sortByLikes}>
-            <MenuItem eventKey="asc">Ascending</MenuItem>
-            <MenuItem eventKey="desc">Descending</MenuItem>
+            <MenuItem eventKey="ascending">Ascending</MenuItem>
+            <MenuItem eventKey="descending">Descending</MenuItem>
           </DropdownButton>
           <Button
             bsStyle="success"
@@ -121,12 +138,19 @@ export default class TweetList extends Component {
         </ButtonGroup>
         <Input
           bsSize="small"
-          disabled
-          placeholder="Search in tweets"
+          placeholder="Write some text and press Enter to filter in Tweets by this text"
           type="text"
+          onKeyPress={this._handleKeyPress}
         />
-        {tweets}
-        <ModalInfo tweets={this.state.sortedTweets} showModalInfo={this.state.showModalInfo} closeModalInfoHandler = {this._hideModalInfo}/>
+        <div>
+          {this.state.filterString !== "" ?
+         <span>Only tweets containing <Label bsStyle="warning">{this.state.filterString}</Label> are shown. </span> : null}
+          Sorted by <Label bsStyle="info">{this.state.currentSorting} {this.state.currentSortingType}</Label> :
+        </div>
+        {tweets.length > 0 ? tweets :
+          <div>There are no tweets containing <Label bsStyle="warning">{this.state.currentSorting}</Label></div>}
+        <ModalInfo tweets={this.state.sortedTweets} showModalInfo={this.state.showModalInfo}
+                   closeModalInfoHandler = {this._hideModalInfo}/>
       </div>
     );
   }
