@@ -1,6 +1,7 @@
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 import {Modal,  Button} from 'react-bootstrap';
+import {getTweetsInfo} from '../lib/tweetsHelper'
 
 
 export default class ModalInfo extends Component {
@@ -53,33 +54,4 @@ export default class ModalInfo extends Component {
       </Modal>
     );
   }
-}
-
-function getTweetsInfo(tweets) {
-  var numberOfLikes = 0, allTweetsText= "", likesPerTweet;
-
-  tweets.forEach(currentTweet =>{
-    numberOfLikes += currentTweet.hasOwnProperty("retweeted_status") ? currentTweet.retweeted_status.favorite_count :
-      currentTweet.favorite_count;
-
-    allTweetsText += currentTweet.text;
-  });
-
-  likesPerTweet = numberOfLikes / tweets.length;
-
-  return {numberOfLikes, likesPerTweet, userNamesInTweetsMap : getUserNamesInTweetsMapFromTweetsText(allTweetsText)};
-}
-
-function getUserNamesInTweetsMapFromTweetsText(allTweetsText) {
-  const userNameRegex = /@([\w_]){1,15}/g;
-  var userNamesInTweetsMap = new Map();
-
-  for (let actualUser = userNameRegex.exec(allTweetsText); actualUser !== null; actualUser = userNameRegex.exec(allTweetsText)) {
-
-    if (!userNamesInTweetsMap.has(actualUser[0].toLowerCase())) {
-
-      userNamesInTweetsMap.set(actualUser[0].toLowerCase(), actualUser[0]);
-    }
-  }
-  return userNamesInTweetsMap;
 }

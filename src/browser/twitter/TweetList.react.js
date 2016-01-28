@@ -5,6 +5,7 @@ import Tweet from 'react-tweet'
 import TweetListButtonGroup from './TweetListButtonGroup.react';
 import ModalInfo from './ModalInfo.react'
 import {Input, Button, Label} from 'react-bootstrap';
+import {createSortedTweets} from '../lib/tweetsHelper'
 
 export default class TweetList extends Component {
 
@@ -91,52 +92,3 @@ export default class TweetList extends Component {
     );
   }
 }
-
-function createSortedTweets(tweets, sortingPropertyName,  sortingType) {
-  if(sortingPropertyName === "date"){
-    return sortByDate(tweets, sortingType);
-  } else {
-    return sortByLikes(tweets, sortingType);
-  }
-}
-
-function sortByDate(tweets, sortingType) {
-  var sortedTweets;
-
-  if(sortingType == "descending") {
-    sortedTweets = tweets.sort((a,b)=>(
-      new Date(b.created_at) - new Date(a.created_at)
-    ));
-  } else{
-    sortedTweets = tweets.sort((a,b)=>(
-      new Date(a.created_at) - new Date(b.created_at)
-    ));
-  }
-
-  return sortedTweets;
-}
-
-function sortByLikes(tweets, sortingType) {
-  var sortedTweets;
-
-  if(sortingType == "descending") {
-    sortedTweets= tweets.sort((a, b)=>{
-      let aFavorite_count = a.hasOwnProperty("retweeted_status") ? a.retweeted_status.favorite_count :
-        a.favorite_count;
-      let bFavorite_count = b.hasOwnProperty("retweeted_status") ? b.retweeted_status.favorite_count :
-        b.favorite_count;
-      return bFavorite_count - aFavorite_count;
-    });
-  } else{
-    sortedTweets = tweets.sort((a, b)=> {
-      let aFavorite_count = a.hasOwnProperty("retweeted_status") ? a.retweeted_status.favorite_count :
-        a.favorite_count;
-      let bFavorite_count = b.hasOwnProperty("retweeted_status") ? b.retweeted_status.favorite_count :
-        b.favorite_count;
-      return aFavorite_count - bFavorite_count;
-      });
-    }
-
-  return sortedTweets;
-}
-
