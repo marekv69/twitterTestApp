@@ -11,6 +11,7 @@ this app is used for showing 50 latest tweets of a twitter user. It's implemente
 ## Main code of the application
 * /twitterTestApp/src/browser/twitter - react component and styles
 * /twitterTestApp/src/browser/lib/ajaxHelper.js - ajax get method impl
+* /twitterTestApp/src/browser/lib/tweetsHelper.js - Contains helepr function for parsing/sorting tweets JSONs from Twitter API
 * /twitterTestApp/src/server/twitter - rest service for gathering tweets from Twitter API
 
 ## Installation
@@ -24,6 +25,5 @@ this app is used for showing 50 latest tweets of a twitter user. It's implemente
  https://marekvtwittertestapp.herokuapp.com/
 
 ## TODO
-* implement fulltext searching in downloaded tweets
 * Try using redux and Immutablejs libraries to implement data layer
 * use more functionality from este framework
