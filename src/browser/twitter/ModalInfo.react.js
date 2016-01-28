@@ -25,7 +25,7 @@ export default class ModalInfo extends Component {
     //This line is here because of bug https://phabricator.babeljs.io/T6662
     const {Header: ModalHeader, Body: ModalBody, Footer: ModalFooter, Title : ModalTitle} = Modal;
 
-    var {numberOfLikes, likesPerTweet, userNamesInTweetsMap} =  getTweetsInfo(this);
+    var {numberOfLikes, likesPerTweet, userNamesInTweetsMap} =  getTweetsInfo(this.props.tweets);
 
     var userNames = null;
     if(userNamesInTweetsMap.size > 0) {
@@ -55,18 +55,17 @@ export default class ModalInfo extends Component {
   }
 }
 
-function getTweetsInfo(modalInfo) {
-  var numberOfLikes = 0, allTweetsText= "";
-  var likesPerTweet;
+function getTweetsInfo(tweets) {
+  var numberOfLikes = 0, allTweetsText= "", likesPerTweet;
 
-  modalInfo.props.tweets.forEach(currentTweet =>{
+  tweets.forEach(currentTweet =>{
     numberOfLikes += currentTweet.hasOwnProperty("retweeted_status") ? currentTweet.retweeted_status.favorite_count :
       currentTweet.favorite_count;
 
     allTweetsText += currentTweet.text;
   });
 
-  likesPerTweet = numberOfLikes / modalInfo.props.tweets.length;
+  likesPerTweet = numberOfLikes / tweets.length;
 
   return {numberOfLikes, likesPerTweet, userNamesInTweetsMap : getUserNamesInTweetsMapFromTweetsText(allTweetsText)};
 }
