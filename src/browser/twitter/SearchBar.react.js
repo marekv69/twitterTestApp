@@ -42,7 +42,7 @@ export default class SearchBar extends Component {
       <div className="search-bar">
         <form>
           <Input
-            className="input"
+            className="searchInput"
             disabled= {this.props.isGUIDisabledDueToLoading}
             onChange={this._handleInputValueChange}
             onKeyPress={this._handleKeyPress}
