@@ -38,10 +38,21 @@ export default class SearchBar extends Component {
   }
 
   render() {
+    const innerButton =
+      <Button
+        disabled={this.state.currentInputValue === "" || this.props.isGUIDisabledDueToLoading}
+        bsStyle="primary"
+        onClick={this._onButtonClick}
+        standalone>
+        { this.props.isGUIDisabledDueToLoading ? "Loading..." : "Show tweets" }
+      </Button>;
+
+
     return (
       <div className="search-bar">
         <form>
           <Input
+            buttonAfter={innerButton}
             className="searchInput"
             disabled= {this.props.isGUIDisabledDueToLoading}
             onChange={this._handleInputValueChange}
@@ -51,14 +62,7 @@ export default class SearchBar extends Component {
             type="text"
             value={this.state.currentInputValue}
           />
-          <Button
-            disabled={this.state.currentInputValue === "" || this.props.isGUIDisabledDueToLoading}
-            bsStyle="primary"
-            onClick={this._onButtonClick}
-            standalone
-          >
-            { this.props.isGUIDisabledDueToLoading ? "Loading..." : "Show tweets" }
-          </Button>
+
         </form>
       </div>
     );
