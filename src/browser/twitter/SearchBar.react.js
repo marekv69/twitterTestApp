@@ -14,7 +14,7 @@ export default class SearchBar extends Component {
     super(props);
     this.state = {
       currentInputValue : ""
-    }
+    };
     this._handleInputValueChange = this._handleInputValueChange.bind(this);
     this._onButtonClick = this._onButtonClick.bind(this);
     this._handleKeyPress = this._handleKeyPress.bind(this);
