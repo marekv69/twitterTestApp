@@ -44,11 +44,7 @@ export default class TweetListButtonGroup extends Component {
             <MenuItem eventKey="ascending">Ascending</MenuItem>
             <MenuItem eventKey="descending">Descending</MenuItem>
           </DropdownButton>
-          <Button
-            bsStyle="success"
-            bsSize="xsmall"
-            onClick={this._showModalInfo}
-          >
+          <Button bsStyle="success" bsSize="xsmall" onClick={this._showModalInfo}>
             Show modal info
           </Button>
         </ButtonGroup>
