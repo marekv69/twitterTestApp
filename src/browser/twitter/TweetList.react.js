@@ -4,10 +4,10 @@ import React, {PropTypes} from 'react';
 import Tweet from 'react-tweet';
 import TweetListButtonGroup from './TweetListButtonGroup.react';
 import TweetListFilterBar from './TweetListFilterBar.react.js';
+import TweetListFilteringAndSortingInfo from './TweetListFilteringAndSortingInfo.react.js';
 import ModalInfo from './ModalInfo.react';
-import {Input, Button, Label} from 'react-bootstrap';
+import {Label} from 'react-bootstrap';
 import {createSortedTweets} from '../lib/tweetsHelper';
-
 
 
 export default class TweetList extends Component {
@@ -69,14 +69,6 @@ export default class TweetList extends Component {
         return arrayWithTweets;
       }, []);
 
-    let filteringInfoOutput =
-      this.state.filterString !== "" ? <span>Only tweets containing <Label
-        bsStyle="warning">{this.state.filterString}</Label> are shown. </span> : null;
-
-    let sortingInfoOutput =
-      <span>Sorted by <Label bsStyle="info">
-      {this.state.currentSortingProperty} {this.state.currentSortingType}</Label> :</span>;
-
     let tweetsOutput =
       filteredTweets.length > 0 ? filteredTweets :
         <div>There are no tweets containing <Label bsStyle="warning">{this.state.filterString}</Label></div>;
@@ -85,10 +77,8 @@ export default class TweetList extends Component {
       <div className="tweet-list">
         <TweetListButtonGroup onChangeSorting={this.changeSorting} showModalInfo={this.showModalInfo}/>
         <TweetListFilterBar onChangeFilteringString={this.changeFilteringString} filterString={this.state.filterString}/>
-        <div>
-          {filteringInfoOutput}
-          {sortingInfoOutput}
-        </div>
+        <TweetListFilteringAndSortingInfo filterString={this.state.filterString} currentSortingProperty=
+          {this.state.currentSortingProperty} currentSortingType={this.state.currentSortingType}/>
         {tweetsOutput}
         <ModalInfo tweets={this.props.tweets} showModalInfo={this.state.showModalInfo}
                    closeModalInfoHandler={this._hideModalInfo}/>
