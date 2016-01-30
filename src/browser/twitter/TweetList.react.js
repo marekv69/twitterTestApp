@@ -3,7 +3,7 @@ import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 import Tweet from 'react-tweet';
 import TweetListButtonGroup from './TweetListButtonGroup.react';
-import FilterInput from './FilterInput.react';
+import TweetListFilterBar from './TweetListFilterBar.react.js';
 import ModalInfo from './ModalInfo.react';
 import {Input, Button, Label} from 'react-bootstrap';
 import {createSortedTweets} from '../lib/tweetsHelper';
@@ -84,7 +84,7 @@ export default class TweetList extends Component {
     return (
       <div className="tweet-list">
         <TweetListButtonGroup onChangeSorting={this.changeSorting} showModalInfo={this.showModalInfo}/>
-        <FilterInput onChangeFilteringString={this.changeFilteringString} />
+        <TweetListFilterBar onChangeFilteringString={this.changeFilteringString} filterString={this.state.filterString}/>
         <div>
           {filteringInfoOutput}
           {sortingInfoOutput}
