@@ -4,7 +4,7 @@ import {Modal,  Button} from 'react-bootstrap';
 import {getTweetsInfo} from '../lib/tweetsHelper'
 
 
-export default class ModalInfo extends Component {
+export default class TweetListModalInfo extends Component {
 
   static propTypes = {
     tweets : PropTypes.array,
@@ -26,9 +26,10 @@ export default class ModalInfo extends Component {
     //This line is here because of bug https://phabricator.babeljs.io/T6662
     const {Header: ModalHeader, Body: ModalBody, Footer: ModalFooter, Title : ModalTitle} = Modal;
 
-    var {numberOfLikes, likesPerTweet, userNamesInTweetsMap} =  getTweetsInfo(this.props.tweets);
+    let {numberOfLikes, likesPerTweet, userNamesInTweetsMap} =  getTweetsInfo(this.props.tweets);
 
-    var userNames = null;
+    let userNames = null;
+
     if(userNamesInTweetsMap.size > 0) {
       userNames = [];
       userNamesInTweetsMap.forEach( (value, key) => {

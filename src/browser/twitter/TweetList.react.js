@@ -1,13 +1,11 @@
 import './TweetList.styl';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
-import Tweet from 'react-tweet';
 import TweetListButtonGroup from './TweetListButtonGroup.react';
-import TweetListFilterBar from './TweetListFilterBar.react.js';
-import TweetListFilteringAndSortingInfo from './TweetListFilteringAndSortingInfo.react.js';
-import ModalInfo from './ModalInfo.react';
-import {Label} from 'react-bootstrap';
-import {createSortedTweets} from '../lib/tweetsHelper';
+import TweetListFilterBar from './TweetListFilterBar.react';
+import TweetListFilteringAndSortingInfo from './TweetListFilteringAndSortingInfo.react';
+import TweetListTweetsOutput from './TweetListTweetsOutput.react';
+import TweetListModalInfo from './TweetListModalInfo.react.js';
 
 
 export default class TweetList extends Component {
@@ -57,21 +55,6 @@ export default class TweetList extends Component {
   }
 
   render() {
-    const filterRegex = this.state.filterString !== "" ? new RegExp(this.state.filterString, "i") : null;
-
-    var sortedTweets = createSortedTweets(this.props.tweets, this.state.currentSortingProperty, this.state.currentSortingType);
-
-    let filteredTweets = sortedTweets
-      .reduce((arrayWithTweets, currentTweet) => {
-        if (filterRegex === null || filterRegex.test(currentTweet.text)) {
-          arrayWithTweets.push(<Tweet data={currentTweet} key={currentTweet.id}/>);
-        }
-        return arrayWithTweets;
-      }, []);
-
-    let tweetsOutput =
-      filteredTweets.length > 0 ? filteredTweets :
-        <div>There are no tweets containing <Label bsStyle="warning">{this.state.filterString}</Label></div>;
 
     return (
       <div className="tweet-list">
@@ -79,8 +62,9 @@ export default class TweetList extends Component {
         <TweetListFilterBar onChangeFilteringString={this.changeFilteringString} filterString={this.state.filterString}/>
         <TweetListFilteringAndSortingInfo filterString={this.state.filterString} currentSortingProperty=
           {this.state.currentSortingProperty} currentSortingType={this.state.currentSortingType}/>
-        {tweetsOutput}
-        <ModalInfo tweets={this.props.tweets} showModalInfo={this.state.showModalInfo}
+        <TweetListTweetsOutput currentSortingProperty={this.state.currentSortingProperty} currentSortingType=
+          {this.state.currentSortingType} filterString={this.state.filterString} tweets={this.props.tweets}/>
+        <TweetListModalInfo tweets={this.props.tweets} showModalInfo={this.state.showModalInfo}
                    closeModalInfoHandler={this._hideModalInfo}/>
       </div>
     );
