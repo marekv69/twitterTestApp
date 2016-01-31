@@ -3,6 +3,10 @@ import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 import {Input, Button} from 'react-bootstrap';
 
+/**
+ * This component is used for searching tweets using Twitter API for a Twitter user
+ * It contains <Input> for entering the username and <Button> for confirmation and starting the search
+ */
 export default class SearchBar extends Component {
 
   static propTypes = {
@@ -62,7 +66,6 @@ export default class SearchBar extends Component {
             type="text"
             value={this.state.currentInputValue}
           />
-
         </form>
       </div>
     );

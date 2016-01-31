@@ -1,5 +1,9 @@
-/** Ajax calls functions **/
-
+/***
+ * This function performs AJAX get request using ES6 Promise
+ *
+ * @param url url of get request
+ * @returns {Promise} ES6 promise for the request
+ */
 export default function ajaxGet(url) {
   return new Promise(function(resolve, reject) {
     let req = new XMLHttpRequest();

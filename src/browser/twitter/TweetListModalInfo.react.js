@@ -3,7 +3,10 @@ import React, {PropTypes} from 'react';
 import {Modal,  Button} from 'react-bootstrap';
 import {getTweetsInfo} from '../lib/tweetsHelper'
 
-
+/**
+ * This component defines ModalInfo dialog contains basic statistics information about the tweets. It contains number
+ * of likes, likes per tweet and list of all Twitter users mentioned in the tweets.
+ */
 export default class TweetListModalInfo extends Component {
 
   static propTypes = {

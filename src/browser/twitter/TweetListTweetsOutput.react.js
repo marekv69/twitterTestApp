@@ -6,6 +6,10 @@ import {Label} from 'react-bootstrap';
 import {createSortedTweets} from '../lib/tweetsHelper';
 
 
+/**
+ * This component shows (sorted/filtered) tweets using <Tweet> component for each of them. If filtering is turned on
+ * and no tweets exist for the filter string the appropriate message is shown instead of tweets
+ */
 export default class TweetListTweetsOutput extends Component {
 
   static propTypes = {

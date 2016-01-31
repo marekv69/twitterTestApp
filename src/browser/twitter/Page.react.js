@@ -6,6 +6,14 @@ import SearchBar from './SearchBar.react';
 import Message from './Message.react';
 import ajaxGet from '../lib/ajaxHelper'
 
+
+/**
+ * This class represents the whole component for showing 50 latest tweets of a Twitter user with specified username.
+ * It contains <SearchBar> component for searching the username of the Twitter user for
+ * who the tweets are shown.
+ * It also contains <TweetList> component for showing Tweets of the user or <Message> component
+ * if user has no tweets or gathering tweets using Twitter API finished with an error
+ */
 export default class Page extends Component {
 
   constructor(props) {

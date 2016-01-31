@@ -1,8 +1,12 @@
-import './TwitterListFilterBar.styl';
+import './TweetListFilterBar.styl';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
 import {Input, Button} from 'react-bootstrap';
 
+/**
+ * This component is used for filtering showed tweets through a filter string in their bodies.
+ * It contains <Input> for entering the filter string and <Button> for confirmation of the filter
+ */
 export default class TweetListFilterBar extends Component {
 
   static propTypes = {
