@@ -55,9 +55,9 @@ export default class Page extends Component {
   }
 
   render() {
-    var tweetsSearchOutput = null;
-    var tweetsResponse = this.state.tweetsResponse;
+    const tweetsResponse = this.state.tweetsResponse;
 
+    let tweetsSearchOutput = null;
     if(tweetsResponse !== null && tweetsResponse.hasOwnProperty("tweets") ){
       tweetsSearchOutput = <TweetList tweets={tweetsResponse.tweets} />;
     } else if (tweetsResponse !== null &&

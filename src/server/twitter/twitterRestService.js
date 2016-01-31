@@ -20,7 +20,8 @@ const config = {
  * get ajax method to Twitter API for gathering 50 latest tweets of a user with specified username
  */
 app.get("/user_timeline",function (req, res)  {
-  var twit = new Twit(config);
+  const twit = new Twit(config);
+
   twit.get('statuses/user_timeline', { screen_name: req.query.screen_name, count: 50 }, (err, data) => {
     let response;
 

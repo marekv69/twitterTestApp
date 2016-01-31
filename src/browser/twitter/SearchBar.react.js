@@ -37,7 +37,7 @@ export default class SearchBar extends Component {
 
   _onButtonClick()
   {
-    var currentInputValue = this.state.currentInputValue;
+    const currentInputValue = this.state.currentInputValue;
     this.props.onSearchBarButtonClick(currentInputValue);
   }
 

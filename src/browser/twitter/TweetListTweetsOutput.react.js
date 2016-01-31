@@ -26,10 +26,9 @@ export default class TweetListTweetsOutput extends Component {
 
   render() {
     const filterRegex = this.props.filterString !== "" ? new RegExp(this.props.filterString, "i") : null;
+    const sortedTweets = createSortedTweets(this.props.tweets, this.props.currentSortingProperty, this.props.currentSortingType);
 
-    var sortedTweets = createSortedTweets(this.props.tweets, this.props.currentSortingProperty, this.props.currentSortingType);
-
-    let filteredTweets = sortedTweets
+    const filteredTweets = sortedTweets
       .reduce((arrayWithTweets, currentTweet) => {
         if (filterRegex === null || filterRegex.test(currentTweet.text)) {
           arrayWithTweets.push(<Tweet data={currentTweet} key={currentTweet.id}/>);

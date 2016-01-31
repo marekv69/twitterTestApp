@@ -36,7 +36,6 @@ export default class TweetListButtonGroup extends Component {
   }
 
   render() {
-
     return (
         <ButtonGroup>
           <DropdownButton title="Sort by date" bsStyle="info" bsSize="xsmall" id="dropdown1"

@@ -17,9 +17,9 @@ export default class Message extends Component {
   }
 
   render() {
-    var message;
-    var tweetResponse = this.props.tweetsResponse;
+    const tweetResponse = this.props.tweetsResponse;
 
+    let message;
     if(tweetResponse.hasOwnProperty("standardMessage")) {
       message = <span>{tweetResponse.standardMessage}</span>
     } else {

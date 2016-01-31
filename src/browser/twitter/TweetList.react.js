@@ -64,7 +64,6 @@ export default class TweetList extends Component {
   }
 
   render() {
-
     return (
       <div className="tweet-list">
         <TweetListButtonGroup onChangeSorting={this.changeSorting} showModalInfo={this.showModalInfo}/>

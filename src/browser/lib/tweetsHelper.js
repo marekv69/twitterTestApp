@@ -27,7 +27,7 @@ function createSortedTweets(tweets, sortingPropertyName,  sortingType) {
  * @returns {{numberOfLikes: number, likesPerTweet: (number|*), userNamesInTweetsMap}}
  */
 function getTweetsInfo(tweets) {
-  var numberOfLikes = 0, allTweetsText= "", likesPerTweet;
+  var numberOfLikes = 0, allTweetsText= "";
 
   tweets.forEach(currentTweet =>{
     numberOfLikes += currentTweet.hasOwnProperty("retweeted_status") ? currentTweet.retweeted_status.favorite_count :
@@ -36,7 +36,7 @@ function getTweetsInfo(tweets) {
     allTweetsText += currentTweet.text;
   });
 
-  likesPerTweet = numberOfLikes / tweets.length;
+  const likesPerTweet = numberOfLikes / tweets.length;
 
   return {numberOfLikes, likesPerTweet, userNamesInTweetsMap : getUserNamesInTweetsMapFromTweetsText(allTweetsText)};
 }
@@ -83,7 +83,7 @@ function sortByLikes(tweets, sortingType) {
 
 function getUserNamesInTweetsMapFromTweetsText(allTweetsText) {
   const userNameRegex = /@([\w_]){1,15}/g;
-  var userNamesInTweetsMap = new Map();
+  let userNamesInTweetsMap = new Map();
 
   for (let actualUser = userNameRegex.exec(allTweetsText); actualUser !== null; actualUser = userNameRegex.exec(allTweetsText)) {
 

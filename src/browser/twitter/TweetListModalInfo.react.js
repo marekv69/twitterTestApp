@@ -29,7 +29,7 @@ export default class TweetListModalInfo extends Component {
     //This line is here because of bug https://phabricator.babeljs.io/T6662
     const {Header: ModalHeader, Body: ModalBody, Footer: ModalFooter, Title : ModalTitle} = Modal;
 
-    let {numberOfLikes, likesPerTweet, userNamesInTweetsMap} =  getTweetsInfo(this.props.tweets);
+    const {numberOfLikes, likesPerTweet, userNamesInTweetsMap} =  getTweetsInfo(this.props.tweets);
 
     let userNames = null;
 

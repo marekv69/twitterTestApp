@@ -19,11 +19,11 @@ export default class TweetListFilteringInfo extends Component {
   }
 
   render() {
-    let filteringInfoOutput =
+    const filteringInfoOutput =
       this.props.filterString !== "" ? <span>Only tweets containing <Label
         bsStyle="warning">{this.props.filterString}</Label> are shown. </span> : null;
 
-    let sortingInfoOutput =
+    const sortingInfoOutput =
       <span>Sorted by <Label bsStyle="info">
         {this.props.currentSortingProperty} {this.props.currentSortingType}</Label> :</span>;
 
