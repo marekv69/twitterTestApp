@@ -8,7 +8,7 @@ this app is used for showing 50 latest tweets of a twitter user. It's implemente
 * [react bootstrap](https://github.com/react-bootstrap/react-bootstrap) - some copmonents (buttons, inputs) are used from this library
 * [twit](https://github.com/ttezel/twit) - module for communication with Twitter API in the backend
 
-## Main code of the application
+## Code of the application in este framework
 * /twitterTestApp/src/browser/twitter - react component and styles
 * /twitterTestApp/src/browser/lib/ajaxHelper.js - ajax get method impl
 * /twitterTestApp/src/browser/lib/tweetsHelper.js - Contains helepr function for parsing/sorting tweets JSONs from Twitter API
@@ -26,4 +26,3 @@ this app is used for showing 50 latest tweets of a twitter user. It's implemente
 
 ## TODO
 * Try using redux and Immutablejs libraries to implement data layer
-* use more functionality from este framework
