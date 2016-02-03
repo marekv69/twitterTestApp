@@ -3,7 +3,7 @@ import AuthLogout from '../auth/Logout.react';
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import React, {PropTypes} from 'react';
-import RouterHandler from '../../common/components/RouterHandler.react';
+import RouterHandler from '../components/RouterHandler.react';
 import {FormattedMessage} from 'react-intl';
 import {Link} from 'react-router';
 
@@ -28,12 +28,12 @@ export default class Page extends Component {
         {children
           ? <RouterHandler {...this.props} />
           : <p>
-              <FormattedMessage
-                defaultMessage={msg.me.welcome}
-                id={'msg.me.welcome'}
-                values={{email}}
-              />
-            </p>
+          <FormattedMessage
+            defaultMessage={msg.me.welcome}
+            id={'msg.me.welcome'}
+            values={{email}}
+          />
+        </p>
         }
         <AuthLogout msg={msg.auth.logout} />
       </div>

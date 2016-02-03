@@ -1,14 +1,13 @@
 export default {
   app: {
     footer: {
-      madeByHtml: 'created using <a href="https://github.com/este/este">este starter kit</a>'
+      madeByHtml: 'made by <a href="https://twitter.com/steida">steida</a>'
     },
     links: {
       home: 'Home',
       login: 'Login',
       me: 'Me (protected)',
-      todos: 'Todos',
-      twitter: 'Show last 50 twitters'
+      todos: 'Todos'
     }
   },
   auth: {
@@ -45,10 +44,10 @@ export default {
     // // TODO: Android text.
     // androidInfoText: ``,
     infoHtml: '<a href="https://github.com/este/este">Este.js</a> dev stack.',
-    iosInfoText: `Este.js dev stack.
-      Open left menu and check todos!
-      Press CMD+R to reload.
-      Press CMD+D for debug menu.
+    iosInfoText: `
+      Este.js dev stack
+      Press CMD+R to reload
+      Press CMD+D for debug menu
     `,
     title: 'Este.js',
     toCheck: {

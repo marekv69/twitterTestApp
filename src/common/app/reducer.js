@@ -1,3 +1,4 @@
+
 import {combineReducers} from 'redux';
 
 // Note we are composing all reducers. Web, native, whatever. Of course we can
@@ -5,6 +6,7 @@ import {combineReducers} from 'redux';
 // do that, until app is really large.
 import auth from '../auth/reducer';
 import device from '../device/reducer';
+import fields from '../fields/reducer';
 import intl from '../intl/reducer';
 import todos from '../todos/reducer';
 import ui from '../ui/reducer';
@@ -13,6 +15,7 @@ import users from '../users/reducer';
 const appReducer = combineReducers({
   auth,
   device,
+  fields,
   intl,
   todos,
   ui,
