@@ -178,3 +178,8 @@ gulp.task('clear-react-packager-cache', () => {
   }
 });
 
+// Must be called after npm install.
+// https://github.com/facebook/react-native/issues/4062#issuecomment-164598155
+gulp.task('remove-babelrc-files', () => {
+  return del(['node_modules/**/.babelrc', '!node_modules/react-native/**']);
+});
