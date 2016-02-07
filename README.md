@@ -25,4 +25,4 @@ this app is used for showing 50 latest tweets of a twitter user. It's implemente
  https://marekvtwittertestapp.herokuapp.com/
 
 ## TODO
-* Try using redux and Immutablejs libraries to implement data layer
+* Try using redux and Immutablejs libraries to implement data layer (Redux already implemented in different project https://github.com/marekv69/reduxTwitterTestApp)
